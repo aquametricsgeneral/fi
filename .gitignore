@@ -1,0 +1,6 @@
+*.pyc
+*~
+__pycache__
+mushroom.sock
+show
+mushroom/settings.py

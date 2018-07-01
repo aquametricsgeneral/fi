@@ -1,0 +1,146 @@
+{% extends 'chart/chart_base.html' %}
+
+{% block page-name %}Chart{% endblock %}
+
+{% block bottom-icon %}
+<script>
+  $("#chart-icon").toggleClass("text-secondary");
+  $("#chart-icon").toggleClass("text-selected");
+  $("#chart-text").toggleClass("text-secondary");
+  $("#chart-text").toggleClass("text-selected");
+</script>
+{% endblock %}
+
+{% block dropdown-menu-default %}
+<script>
+var url = window.location.href;
+var id = url.split('/')[4];
+
+switch (id) {
+  case 'MH0001_TEMP':
+    document.getElementById('dropdownMenuButton_sensor').innerHTML = 'Air Temp 1';
+    break;
+
+  case 'MH0001_HUMIDITY':
+    document.getElementById('dropdownMenuButton_sensor').innerHTML = 'Humidity 1';
+    break;
+
+  case 'MH0002_TEMP':
+    document.getElementById('dropdownMenuButton_sensor').innerHTML = 'Air Temp 2';
+    break;
+
+  case 'MH0002_HUMIDITY':
+    document.getElementById('dropdownMenuButton_sensor').innerHTML = 'Humidity 2';
+    break;
+
+  case 'MH0003_TEMP':
+    document.getElementById('dropdownMenuButton_sensor').innerHTML = 'Air Temp 3';
+    break;
+
+  case 'MH0003_HUMIDITY':
+    document.getElementById('dropdownMenuButton_sensor').innerHTML = 'Humidity 3';
+    break;
+
+  default:
+    console.log("Error");
+}
+</script>
+{% endblock %}
+
+{% block sensor %}
+var url = window.location.href;
+var id = url.split('/')[4];
+var label = '';
+var title = '';
+var callback = function(value, index, values) {return value;};
+
+switch (id) {
+  case 'MH0001_TEMP':
+    label = 'Temp (°C)';
+    title = 'Air Temp 1';
+    min = 20;
+    max = 50;
+    stepSize = 5;
+    break;
+
+  case 'MH0001_HUMIDITY':
+    label = 'Humidity (%)';
+    title = 'Humidity 1';
+    min = 40;
+    max = 100;
+    stepSize = 10;
+    break;
+
+  case 'MH0002_TEMP':
+    label = 'Temp (°C)';
+    title = 'Air Temp 2';
+    min = 20;
+    max = 50;
+    stepSize = 5;
+    break;
+
+  case 'MH0002_HUMIDITY':
+    label = 'Humidity (%)';
+    title = 'Humidity 2';
+    min = 40;
+    max = 100;
+    stepSize = 10;
+    break;
+
+  case 'MH0003_TEMP':
+    label = 'Temp (°C)';
+    title = 'Air Temp 3';
+    min = 20;
+    max = 50;
+    stepSize = 5;
+    break;
+
+  case 'MH0003_HUMIDITY':
+    label = 'Humidity (%)';
+    title = 'Humidity 3';
+    min = 40;
+    max = 100;
+    stepSize = 10;
+    break;
+
+  default:
+    console.log("Error");
+}
+
+var sensor = {data: {{ sensor_value|safe }}, label: label, title: title};
+{% endblock %}
+
+{% block ajax %}
+var url = window.location.href;
+var id = url.split('/')[4];
+var sensor = '';
+
+switch (id) {
+  case 'MH0001_TEMP':
+    sensor = 'MH0001_TEMP';
+    break;
+
+  case 'MH0001_HUMIDITY':
+    sensor = 'MH0001_HUMIDITY';
+    break;
+
+  case 'MH0002_TEMP':
+    sensor = 'MH0002_TEMP';
+    break;
+
+  case 'MH0002_HUMIDITY':
+    sensor = 'MH0002_HUMIDITY';
+    break;
+
+  case 'MH0003_TEMP':
+    sensor = 'MH0003_TEMP';
+    break;
+
+  case 'MH0003_HUMIDITY':
+    sensor = 'MH0003_HUMIDITY';
+    break;
+
+  default:
+    console.log("Error");
+}
+{% endblock %}
